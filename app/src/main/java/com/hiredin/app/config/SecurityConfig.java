@@ -14,23 +14,24 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/jobs", "/register", "/login").permitAll()
-                .requestMatchers("/employer/**").hasRole("EMPLOYER")
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
-                .defaultSuccessUrl("/dashboard", true)
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutSuccessUrl("/")
-                .permitAll()
-            );
+    	http
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/", "/jobs", "/register", "/login").permitAll()
+            .requestMatchers("/profile", "/dashboard").authenticated()
+            .requestMatchers("/employer/**").hasRole("EMPLOYER")
+            .requestMatchers("/admin/**").hasRole("ADMIN")
+            .anyRequest().authenticated()
+        )
+        .formLogin(form -> form
+            .loginPage("/login")
+            .defaultSuccessUrl("/dashboard", true)
+            .permitAll()
+        )
+        .logout(logout -> logout
+            .logoutSuccessUrl("/")
+            .permitAll()
+        );
+
 
         return http.build();
     }

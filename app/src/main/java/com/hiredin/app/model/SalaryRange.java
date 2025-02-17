@@ -1,27 +1,45 @@
 package com.hiredin.app.model;
 
+import java.math.BigDecimal;
+
 public class SalaryRange {
-    private Double minimum;
-    private Double maximum;
+    private BigDecimal minimum;
+    private BigDecimal maximum;
     private String currency;
 
     // Default constructor
     public SalaryRange() {}
 
+    // Constructor with parameters
+    public SalaryRange(BigDecimal minimum, BigDecimal maximum, String currency) {
+        if (minimum != null && maximum != null && minimum.compareTo(maximum) > 0) {
+            throw new IllegalArgumentException("Minimum salary cannot be greater than maximum salary");
+        }
+        this.minimum = minimum;
+        this.maximum = maximum;
+        this.currency = currency;
+    }
+
     // Getters and Setters
-    public Double getMinimum() {
+    public BigDecimal getMinimum() {
         return minimum;
     }
 
-    public void setMinimum(Double minimum) {
+    public void setMinimum(BigDecimal minimum) {
+        if (maximum != null && minimum.compareTo(maximum) > 0) {
+            throw new IllegalArgumentException("Minimum salary cannot be greater than maximum salary");
+        }
         this.minimum = minimum;
     }
 
-    public Double getMaximum() {
+    public BigDecimal getMaximum() {
         return maximum;
     }
 
-    public void setMaximum(Double maximum) {
+    public void setMaximum(BigDecimal maximum) {
+        if (minimum != null && minimum.compareTo(maximum) > 0) {
+            throw new IllegalArgumentException("Minimum salary cannot be greater than maximum salary");
+        }
         this.maximum = maximum;
     }
 
@@ -31,5 +49,10 @@ public class SalaryRange {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    @Override
+    public String toString() {
+        return "SalaryRange [minimum=" + minimum + ", maximum=" + maximum + ", currency=" + currency + "]";
     }
 }

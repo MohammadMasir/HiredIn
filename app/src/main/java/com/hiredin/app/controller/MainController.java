@@ -1,11 +1,11 @@
 package com.hiredin.app.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 
 @Controller
 public class MainController {
@@ -24,8 +24,14 @@ public class MainController {
     }
 
     @GetMapping("/dashboard")
-    public String dashboard(@AuthenticationPrincipal User user, Model model) {
-        model.addAttribute("username", user.getUsername());
+    public String dashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        if (userDetails != null) {
+            model.addAttribute("username", userDetails.getUsername());
+            model.addAttribute("roles", userDetails.getAuthorities()); // Show user roles
+        } else {
+            model.addAttribute("username", "Guest");
+            model.addAttribute("roles", "None");
+        }
         return "dashboard";  // Loads dashboard.html
     }
 }
