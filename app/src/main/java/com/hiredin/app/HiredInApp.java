@@ -20,5 +20,5 @@ public class HiredInApp {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HiredInApp.class, args);
-	}
+	} //fhf
 }
