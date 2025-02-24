@@ -1,6 +1,7 @@
 package com.hiredin.app.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -22,7 +23,7 @@ public class User {
     @JsonIgnore
     private String password; // Ensure it is stored securely as an encoded hash
     
-    private Set<Role> roles; // Changed to a Set<Role> to allow multiple roles
+//    private Set<Role> roles; // Changed to a Set<Role> to allow multiple roles
     
     private String firstName;
     private String lastName;
@@ -37,15 +38,19 @@ public class User {
     @LastModifiedDate
     private Date updatedAt;
 
-    // Constructor (No Args)
-    public User() {}
+    private Set<Role> roles = new HashSet<>();  // Initialize to empty set
     
-    //Constructor Args
-    public User(String username, String email, String password, Set<Role> roles)  {
+    // Default constructor
+    public User() {
+        this.roles = new HashSet<>();  // Initialize in constructor too
+    }
+    
+    // Other constructor
+    public User(String username, String email, String password, Set<Role> roles) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.roles = roles;
+        this.roles = roles != null ? roles : new HashSet<>();
     }
 
     // Getters and Setters
@@ -81,10 +86,11 @@ public class User {
         this.password = password;
     }
 
+    // Getter and setter for roles
     public Set<Role> getRoles() {
-        return roles;
+        return roles != null ? roles : new HashSet<>();
     }
-
+    
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }

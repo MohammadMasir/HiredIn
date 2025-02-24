@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    padding: 15px 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+nav .nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+nav .nav-buttons a {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+nav .login {
+    background-color: white;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+nav .signup {
+    background-color: #ffcc00;
+    color: white;
+    border: 2px solid #ffcc00;
+}
+
+/* Main Content */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 80vh;
+    padding-left: 50px;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn-group a {
+    display: inline-block;
+    width: 250px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.btn-group .hire {
+    background-color: #28a745;
+}
+
+.btn-group .hire:hover {
+    background-color: #218838;
+}
+
+.btn-group .view {
+    background-color: #007bff;
+}
+
+.btn-group .view:hover {
+    background-color: #0056b3;
+}

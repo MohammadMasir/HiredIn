@@ -1,24 +1,36 @@
 package com.hiredin.app.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.hiredin.app.model.User;
 import com.hiredin.app.service.AuthService;
 
-@RestController
-@RequestMapping("/auth")
+//@Controller
 public class AuthController {
-    private final AuthService authService;
-
-    public AuthController(AuthService authService) {
-        this.authService = authService;
-    }
-
-    @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return authService.registerUser(user.getUsername(), user.getEmail(), user.getPassword());
-    }
+//    private final AuthService authService;
+//
+//    public AuthController(AuthService authService) {
+//        this.authService = authService;
+//    }
+//
+//    @GetMapping({"/register", "/signup"}) // Handle both URLs
+//    public String showRegistrationForm(Model model) {
+//        model.addAttribute("user", new User());
+//        return "templates/register";
+//    }
+//
+//    @PostMapping("/register")
+//    public String register(@ModelAttribute User user, Model model) {
+//        try {
+//            authService.registerUser(user.getUsername(), user.getEmail(), user.getPassword());
+//            return "redirect:/login?registered=true";
+//        } catch (RuntimeException e) {
+//            model.addAttribute("error", e.getMessage());
+//            return "templates/register";
+//        }
+//    }
 }

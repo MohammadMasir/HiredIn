@@ -9,40 +9,40 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
+//@Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    	http
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/", "/jobs", "/register", "/login").permitAll()
-            .requestMatchers("/profile", "/dashboard").authenticated()
-            .requestMatchers("/employer/**").hasRole("EMPLOYER")
-            .requestMatchers("/admin/**").hasRole("ADMIN")
-            .anyRequest().authenticated()
-        )
-        .formLogin(form -> form
-            .loginPage("/login")
-            .defaultSuccessUrl("/dashboard", true)
-            .permitAll()
-        )
-        .logout(logout -> logout
-            .logoutSuccessUrl("/")
-            .permitAll()
-        );
-
-
-        return http.build();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//            .authorizeHttpRequests(auth -> auth
+//                .requestMatchers("/", "/jobs", "/register", "/login", "/signup", "/auth/**").permitAll()
+//                .requestMatchers("/profile", "/dashboard").authenticated()
+//                .requestMatchers("/employer/**").hasRole("EMPLOYER")
+//                .requestMatchers("/admin/**").hasRole("ADMIN")
+//                .anyRequest().authenticated()
+//            )
+//            .formLogin(form -> form
+//                .loginPage("/login")
+//                .defaultSuccessUrl("/dashboard", true)
+//                .permitAll()
+//            )
+//            .logout(logout -> logout
+//                .logoutSuccessUrl("/")
+//                .permitAll()
+//            )
+//            .csrf(csrf -> csrf.disable());
+//
+//        return http.build();
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+//        return authenticationConfiguration.getAuthenticationManager();
+//    }
 }
