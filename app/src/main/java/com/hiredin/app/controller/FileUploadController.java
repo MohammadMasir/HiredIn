@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
-@RequestMapping("/hiredin/application")
+@RequestMapping("/api/jobApplication")
 public class FileUploadController {
 
     @Autowired

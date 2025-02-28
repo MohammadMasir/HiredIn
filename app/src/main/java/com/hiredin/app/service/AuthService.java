@@ -3,7 +3,7 @@ package com.hiredin.app.service;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hiredin.app.model.User;

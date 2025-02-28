@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "jobs")
 public class Job {
 	
-	@Id
+	@Id 
 	private String id;
 	private String employerId;
 	private String title;
@@ -17,7 +17,7 @@ public class Job {
 	private String location;
 	private JobType type;
 	private String description;
-	private List<String> requirements;
+	private List<Requirement> requirements;
 	private SalaryRange salary;
 	private Date applicationDeadline;
 	private JobStatus status;
@@ -64,10 +64,10 @@ public class Job {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<String> getRequirements() {
+	public List<Requirement> getRequirements() {
 		return requirements;
 	}
-	public void setRequirements(List<String> requirements) {
+	public void setRequirements(List<Requirement> requirements) {
 		this.requirements = requirements;
 	}
 	public SalaryRange getSalary() {

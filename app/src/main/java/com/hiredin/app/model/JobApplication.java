@@ -2,25 +2,27 @@ package com.hiredin.app.model;
 
 import java.util.Date;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "applications")
-public class Application {
+public class JobApplication {
 	
 	 @Id
 	 private String id;
 	 private String jobId;
 	 private String applicantId;
 	 private ApplicationStatus status;
-	 private String resumeUrl;
+	 private String resumeUrl; // Cloudinary Service
+	 private Binary resumeBinary; // Mongodb Database
 	 private String coverLetter;
 	 private Date appliedDate;
 	 private String employerNotes;
 	 private Date createdAt;
 	 private Date updatedAt;
 	 
-	 public Application() {}
+	 public JobApplication() {}
 	
 	public enum ApplicationStatus {
 	 PENDING, REVIEWED, SHORTLISTED, REJECTED

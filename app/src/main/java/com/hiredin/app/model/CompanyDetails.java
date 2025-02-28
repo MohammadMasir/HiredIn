@@ -12,7 +12,7 @@ public class CompanyDetails {
 	public CompanyDetails() {}
 
 	public enum UserRole {
-		ADMIN, EMPLOYER, JOBSEEKER
+		ADMIN, EMPLOYER, USER
 	}
 
 	public String getName() {

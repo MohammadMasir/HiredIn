@@ -10,14 +10,17 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hiredin.app.model.Job;
 import com.hiredin.app.service.JobService;
 
 @RestController
-@RequestMapping("/jobs")
+@RequestMapping("/api/jobs")
 public class JobController {
     
 	@Autowired
@@ -38,6 +41,16 @@ public class JobController {
                 .internalServerError()
                 .body("Error retrieving jobs: " + e.getMessage());
         }
+    }
+    
+    @PostMapping
+//    @ResponseBody
+    public ResponseEntity<?> hire(@RequestBody Job job){
+//    	Job jobObJob  = <Job> job;
+    	if (jobService.newJob(job)) {
+    		return new ResponseEntity<>(HttpStatus.CREATED);
+    	}
+    	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
     @GetMapping("/{text}")

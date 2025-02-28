@@ -23,6 +23,15 @@ public class JobService {
 		return jobRepo.findAll();
 	}
 	
+	public Boolean newJob(Job job) {
+		try {
+			jobRepo.save(job);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 	public List<Job> searchJob(String text){
 		return searchRepo.searchByText(text);
 	}
