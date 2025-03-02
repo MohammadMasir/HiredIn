@@ -3,12 +3,13 @@ package com.hiredin.app.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.hiredin.app.model.User;
 import com.hiredin.app.model.enums.Role;
 
-public interface UserRepository extends MongoRepository<User, String> {
+public interface UserRepository extends MongoRepository<User, ObjectId> {
     Optional<User> findByEmail(String email);
-    List<User> findByRole(Role role);
+//    List<User> findByRole(Role role);
 }

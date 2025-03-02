@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,7 +18,7 @@ import com.hiredin.app.model.enums.Role;
 public class User {
     
     @Id
-    private String id;
+    private ObjectId id;
     
     @Indexed(unique = true)
     private String username;
@@ -87,11 +88,11 @@ public class User {
     }
     
     // Getters and Setters
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
     
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
     

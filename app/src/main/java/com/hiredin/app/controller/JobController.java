@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hiredin.app.model.Job;
 import com.hiredin.app.service.JobService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/jobs")
+@Tag(name="Jobs Management", description="Endpoints for managing Jobs")
 public class JobController {
     
 	@Autowired
@@ -44,9 +47,7 @@ public class JobController {
     }
     
     @PostMapping
-//    @ResponseBody
     public ResponseEntity<?> hire(@RequestBody Job job){
-//    	Job jobObJob  = <Job> job;
     	if (jobService.newJob(job)) {
     		return new ResponseEntity<>(HttpStatus.CREATED);
     	}

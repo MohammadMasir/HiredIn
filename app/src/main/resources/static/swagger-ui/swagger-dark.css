@@ -1,0 +1,78 @@
+body {
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+}
+
+.swagger-ui {
+  color: #f1f1f1;
+  background-color: #1a1a1a;
+}
+
+.swagger-ui .info .title,
+.swagger-ui .info h1,
+.swagger-ui .info h2,
+.swagger-ui .info h3,
+.swagger-ui .info h4,
+.swagger-ui .info h5,
+.swagger-ui .opblock-tag,
+.swagger-ui .opblock .opblock-summary-operation-id,
+.swagger-ui .opblock .opblock-summary-path,
+.swagger-ui .opblock .opblock-summary-path__deprecated,
+.swagger-ui .opblock .opblock-summary-description,
+.swagger-ui .opblock-description-wrapper p {
+  color: #f1f1f1;
+}
+
+.swagger-ui .opblock {
+  background-color: #2d2d2d;
+  border-color: #3c3c3c;
+}
+
+.swagger-ui .opblock .opblock-summary {
+  border-color: #3c3c3c;
+}
+
+.swagger-ui input,
+.swagger-ui select,
+.swagger-ui textarea {
+  background-color: #2d2d2d;
+  color: #f1f1f1;
+  border-color: #3c3c3c;
+}
+
+.swagger-ui .btn {
+  background-color: #4a4a4a;
+  color: #f1f1f1;
+}
+
+.swagger-ui .scheme-container {
+  background-color: #2d2d2d;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.swagger-ui .topbar {
+  background-color: #1a1a1a;
+}
+
+.swagger-ui section.models {
+  background-color: #2d2d2d;
+  border-color: #3c3c3c;
+}
+
+.swagger-ui .model-box {
+  background-color: #2d2d2d;
+}
+
+.swagger-ui .parameter__name,
+.swagger-ui .parameter__type {
+  color: #f1f1f1;
+}
+
+.swagger-ui table thead tr th {
+  background-color: #2d2d2d;
+  color: #f1f1f1;
+}
+
+.swagger-ui .response-col_status {
+  color: #f1f1f1;
+}

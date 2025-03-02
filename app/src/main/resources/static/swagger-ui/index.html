@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HiredIn API Documentation</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/swagger-ui/swagger-ui.css" />
+  <link rel="stylesheet" type="text/css" href="/swagger-ui/swagger-dark.css" id="dark-theme" disabled />
+  <style>
+    .topbar-wrapper img {
+      content: url('/swagger-ui/logo.png');
+    }
+    .theme-toggle {
+      position: absolute;
+      top: 10px;
+      right: 50px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div id="swagger-ui"></div>
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+
+  <script src="/webjars/swagger-ui/swagger-ui-bundle.js"></script>
+  <script src="/webjars/swagger-ui/swagger-ui-standalone-preset.js"></script>
+  <script>
+    window.onload = function() {
+      // Load theme preference from local storage
+      const darkMode = localStorage.getItem('darkMode') === 'true';
+      setTheme(darkMode);
+
+      // Configure Swagger UI
+      window.ui = SwaggerUIBundle({
+        url: "/v3/api-docs",
+        dom_id: "#swagger-ui",
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout"
+      });
+    };
+
+    function toggleTheme() {
+      const darkTheme = document.getElementById('dark-theme');
+      const isDark = !darkTheme.disabled;
+      setTheme(!isDark);
+      localStorage.setItem('darkMode', !isDark);
+    }
+
+    function setTheme(darkMode) {
+      const darkTheme = document.getElementById('dark-theme');
+      darkTheme.disabled = !darkMode;
+    }
+  </script>
+</body>
+</html>
