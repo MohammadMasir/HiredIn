@@ -16,8 +16,14 @@ public class Job {
 	private ObjectId id;
 	@Indexed
 	private String employerId;
+	
+	@Indexed
 	private String title;
+	
+	@Indexed
 	private CompanyDetails company;
+	
+	@Indexed
 	private Location location;
 	
 	@Indexed

@@ -59,6 +59,7 @@ public class JobApplicationService {
 			JobApplication jApplication = getJobAppById(id);
 			if(jApplication != null) {
 				jApplication.getResume().setUrl(updjobApplication.getResume().getUrl());
+				jApplication.setResume(updjobApplication.getResume());
 				jobAppRepo.save(jApplication);
 				return true;
 			}
@@ -67,6 +68,11 @@ public class JobApplicationService {
 			return false;
 		}
 		return false;
+	}
+	
+	public void deleteUser(String id) {
+		ObjectId bid = new ObjectId(id);
+		jobAppRepo.deleteById(bid);
 	}
 	
 }

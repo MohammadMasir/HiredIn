@@ -1,13 +1,14 @@
 package com.hiredin.app.controller;
 
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,15 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hiredin.app.model.JobApplication;
-import com.hiredin.app.model.User;
 import com.hiredin.app.repository.FileServiceInterface;
-import com.hiredin.app.repository.UserServiceInterface;
 import com.hiredin.app.service.JobApplicationService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -43,6 +41,7 @@ public class JobApplicationController {
     }
 	
 	@PostMapping
+    @Operation(summary = "Creates a Job Application", description = "Creating a Job Application")
 	public ResponseEntity<?> application(@RequestBody JobApplication jobApplication){
 		
 		if (jobAppService.newApplication(jobApplication)) {
@@ -52,6 +51,7 @@ public class JobApplicationController {
 	}
 	
 	@GetMapping
+    @Operation(summary = "Shows Every Job Applications", description = "Shows Every Job Application that are stored in the Database.")
 	public ResponseEntity<?> allApplications(){
 		try {
 			List<JobApplication> ja = jobAppService.getApp();
@@ -63,6 +63,7 @@ public class JobApplicationController {
 	}
 	
 	@GetMapping("/applicant/{id}")
+    @Operation(summary = "Shows Job Applications for User", description = "Shows all the Job Applications applied by a particular User")
 	public ResponseEntity<?> getByApplicantId(@PathVariable String id) {
 		try {
 			List<JobApplication> ja = jobAppService.findById(id);
@@ -73,6 +74,7 @@ public class JobApplicationController {
 	}
 	
 	@GetMapping("/{id}")
+    @Operation(summary = "Shows a single Job Application.", description = "Shows all the Job Applications from their ID using Indexing.")
 	public ResponseEntity<JobApplication> getById(@PathVariable String id) {
 		try {
 			JobApplication ja = jobAppService.getJobAppById(id);
@@ -81,6 +83,17 @@ public class JobApplicationController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete's a JobApplication")
+    public ResponseEntity<?> deleteJob(String id){
+    	try {
+			jobAppService.deleteUser(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+    }
 	
 	
     @PostMapping(
@@ -102,7 +115,7 @@ public class JobApplicationController {
         	JobApplication ja = jobAppService.getJobAppById(id);
         	
         	String resumeUrl = fileService.storeFile(file);
-            ja.getResume().setUrl(resumeUrl);;
+            ja.getResume().setUrl(resumeUrl);
             
             jobAppService.updateApplication(id, ja);
             return ResponseEntity.ok("Resume uploaded successfully");

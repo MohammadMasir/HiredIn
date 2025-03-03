@@ -43,6 +43,7 @@ public class UserController {
     }
 	
 	@GetMapping
+    @Operation(summary = "Show all Users")
 	public ResponseEntity<?> allUser(){
 		List<User> users = userService.getAllUsers();
 		try {
@@ -53,6 +54,7 @@ public class UserController {
 	}
 	
 	@PostMapping
+    @Operation(summary = "Create a new User")
 	public ResponseEntity<?> newUser(@RequestBody User user){
 		if(userService.createUser(user)) {
 			return new ResponseEntity<>(HttpStatus.CREATED);
@@ -61,6 +63,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/{id}")
+    @Operation(summary = "Find a User by 'id'.", description = "Finds any bUser by their ID using Indexing")
 	public ResponseEntity<User> getById(@PathVariable String id) {
 		try {
 			return new ResponseEntity<>(userService.getUserById(id),HttpStatus.OK);
@@ -70,6 +73,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/by/{email}")
+    @Operation(summary = "Find a user by 'email'.", description = "Finds any bUser by their ID using Indexing")
 	public ResponseEntity<?> getByEmail(@PathVariable String email) {
 		try {
 			return new ResponseEntity<>(userService.findByEmail(email),HttpStatus.OK);
@@ -79,6 +83,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/{id}")
+    @Operation(summary = "Update any User details")
 	public ResponseEntity<?> updateUser(@PathVariable String id,@RequestBody User user){
 		if (userService.updateUser(id, user)) {
 			User updatedUSer = userService.getUserById(id);
@@ -88,6 +93,7 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/{id}")
+    @Operation(summary = "Delete's a User")
 	public ResponseEntity<Void> deleteUser(@PathVariable String id){
 		try {
 			userService.deleteUser(id);
@@ -102,7 +108,7 @@ public class UserController {
     		value = "/{id}/profile-picture",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Upload profile picture", description = "Upload a profile picture for a user")
+    @Operation(summary = "Upload profile picture", description = "Upload a profile picture for a user in the Cloudinary Service and then Store's it's URL in the MongoDB")
     public ResponseEntity<String> uploadProfilePicture(
         @PathVariable String id,
         @Parameter(
