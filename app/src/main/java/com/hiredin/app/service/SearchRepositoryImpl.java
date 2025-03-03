@@ -1,4 +1,4 @@
-package com.hiredin.app.repository;
+package com.hiredin.app.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.stereotype.Component;
 
 import com.hiredin.app.model.Job;
+import com.hiredin.app.repository.SearchRepository;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;

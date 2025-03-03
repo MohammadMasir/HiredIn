@@ -11,7 +11,7 @@ public interface UserServiceInterface {
     Boolean createUser(User user);
     User getUserById(String id);
     List<User> getAllUsers();
-    Boolean updateUserEFL(String id, User updatedUser);
+    Boolean updateUser(String id, User updatedUser);
     void deleteUser(String id);
     Optional<User> findByEmail(String email);
 }

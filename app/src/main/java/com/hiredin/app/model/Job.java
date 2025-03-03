@@ -1,10 +1,12 @@
 package com.hiredin.app.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "jobs")
@@ -12,18 +14,41 @@ public class Job {
 	
 	@Id 
 	private ObjectId id;
+	@Indexed
 	private String employerId;
 	private String title;
-	private String company;
-	private String location;
+	private CompanyDetails company;
+	private Location location;
+	
+	@Indexed
 	private JobType type;
 	private String description;
+	
+	@Indexed
 	private List<Requirement> requirements;
 	private SalaryRange salary;
+	
+	@Indexed
 	private Date applicationDeadline;
+	
+	@Indexed
 	private JobStatus status;
-	private Date createdAt;
-	private Date updatedAt;
+	private List<ApplicationCount> applications;
+	
+	@Indexed
+	private LocalDateTime postedAt;
+	private LocalDateTime updatedAt;
+	
+	public static class ApplicationCount {
+        private int count;
+        private JobStatus status;
+        
+        // Getters and setters
+        public int getCount() { return count; }
+        public void setCount(int count) { this.count = count; }
+        public JobStatus getStatus() { return status; }
+        public void setStatus(JobStatus status) { this.status = status; }
+    }
 	
 	public Job() {
 		
@@ -41,16 +66,16 @@ public class Job {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getCompany() {
+	public CompanyDetails getCompany() {
 		return company;
 	}
-	public void setCompany(String company) {
+	public void setCompany(CompanyDetails company) {
 		this.company = company;
 	}
-	public String getLocation() {
+	public Location getLocation() {
 		return location;
 	}
-	public void setLocation(String location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 	public JobType getType() {
@@ -89,19 +114,27 @@ public class Job {
 	public void setStatus(JobStatus status) {
 		this.status = status;
 	}
-	public Date getCreatedAt() {
-		return createdAt;
+	public LocalDateTime getPostedAt() {
+		return postedAt;
 	}
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+
+	public void setPostedAt(LocalDateTime postedAt) {
+		this.postedAt = postedAt;
 	}
-	public Date getUpdatedAt() {
+	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
+	public List<ApplicationCount> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<ApplicationCount> applications) {
+		this.applications = applications;
+	}
 	public enum JobStatus {
 		 OPEN, FILLED, EXPIRED
 		}
@@ -115,9 +148,6 @@ public class Job {
 		return "Job [id=" + id + ", employerId=" + employerId + ", title=" + title + ", company=" + company
 				+ ", location=" + location + ", type=" + type + ", description=" + description + ", requirements="
 				+ requirements + ", salary=" + salary + ", applicationDeadline=" + applicationDeadline + ", status="
-				+ status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+				+ status + ", createdAt=" + postedAt + ", updatedAt=" + updatedAt + "]";
 	}
-	
 }
-
-

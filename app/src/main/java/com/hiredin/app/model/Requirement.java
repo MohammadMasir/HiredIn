@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Requirement {
     private List<String> skills;
-    private int experience;
+    private Experience experience;
     private String qualification;
 
     // Constructors, getters, setters...
@@ -19,11 +19,11 @@ public class Requirement {
         this.skills = skills;
     }
 
-    public int getExperience() {
+    public Experience getExperience() {
         return experience;
     }
 
-    public void setExperience(int experience) {
+    public void setExperience(Experience experience) {
         this.experience = experience;
     }
 

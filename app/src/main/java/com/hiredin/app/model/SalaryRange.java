@@ -2,10 +2,13 @@ package com.hiredin.app.model;
 
 import java.math.BigDecimal;
 
+import com.hiredin.app.model.enums.Period;
+
 public class SalaryRange {
     private BigDecimal minimum;
     private BigDecimal maximum;
     private String currency;
+    private Period period;
 
     // Default constructor
     public SalaryRange() {}
@@ -55,4 +58,12 @@ public class SalaryRange {
     public String toString() {
         return "SalaryRange [minimum=" + minimum + ", maximum=" + maximum + ", currency=" + currency + "]";
     }
+
+	public Period getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(Period period) {
+		this.period = period;
+	}
 }

@@ -42,13 +42,16 @@ public class UserServiceImpl implements UserServiceInterface {
 	}
 
 	@Override
-	public Boolean updateUserEFL(String id, User updatedUser) {
+	public Boolean updateUser(String id, User updatedUser) {
 		User oldUser = getUserById(id);
 		if (oldUser != null) {
 			oldUser.setEmail(updatedUser.getEmail() != null && !updatedUser.getEmail().equals("") ? updatedUser.getEmail() : oldUser.getEmail());
 			oldUser.setFirstName(updatedUser.getFirstName() != null && !updatedUser.getFirstName().equals("") ? updatedUser.getFirstName() : oldUser.getFirstName());
 			oldUser.setLastName(updatedUser.getLastName() != null && !updatedUser.getLastName().equals("") ? updatedUser.getLastName() : oldUser.getLastName());
-			
+			oldUser.setProfilePicture(updatedUser.getProfilePicture());
+			oldUser.setProfilePictureUrl(updatedUser.getProfilePictureUrl());
+			oldUser.setRoles(updatedUser.getRoles() != null && !updatedUser.getRoles().equals("") ? updatedUser.getRoles() : oldUser.getRoles());
+			oldUser.setCompany(updatedUser.getCompany() != null && !updatedUser.getCompany().equals("") ? updatedUser.getCompany() : oldUser.getCompany());			
 			userRepository.save(oldUser);
 			return true;
 		}

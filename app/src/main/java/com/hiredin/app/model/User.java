@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -35,6 +36,7 @@ public class User {
     // Profile information
     private String profilePictureUrl; // For external storage (Cloudinary, S3, etc.)
     private String resumeUrl; // For external storage of resume documents
+    private Binary profilePicture;
     
     // Company details for employer users
     private CompanyDetails company;
@@ -183,4 +185,12 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles != null ? roles : new HashSet<>();
     }
+
+	public Binary getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(Binary profilePicture) {
+		this.profilePicture = profilePicture;
+	}
 }
