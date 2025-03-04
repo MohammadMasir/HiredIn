@@ -1,6 +1,7 @@
 package com.hiredin.app.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,6 +90,18 @@ public class JobController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
+    }
+    
+    @GetMapping("/stats")
+    @Operation(summary = "Get job statistics", description = "Retrieves statistics about job postings")
+    public ResponseEntity<?> getJobStats() {
+    	try {
+        	Map<String, Object> response = jobService.getJobStats();
+            return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
     }
     
 }

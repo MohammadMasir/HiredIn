@@ -1,16 +1,25 @@
 package com.hiredin.app.service;
 
-import java.util.List;
-
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
+//import org.springdoc.core.converters.models.Sort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.stereotype.Service;
+
 import com.hiredin.app.model.Job;
 import com.hiredin.app.model.Location;
 import com.hiredin.app.model.SalaryRange;
-import com.hiredin.app.model.User;
+import com.hiredin.app.model.enums.JobStatus;
 import com.hiredin.app.repository.JobRepository;
 import com.hiredin.app.repository.SearchRepository;
 
@@ -22,6 +31,9 @@ public class JobService {
 	
 	@Autowired
 	SearchRepository searchRepo;
+	
+	@Autowired
+    MongoTemplate mongoTemplate;
 	
 	public List<Job> fetchJobs(){
 		return jobRepo.findAll();
@@ -94,6 +106,31 @@ public class JobService {
 	        return true;
 	    }
 	    return false;
+	}
+	
+//	@GetMapping("/stats")
+//	@Operation(summary = "Get job statistics", description = "Retrieves statistics about job postings")
+	public Map<String, Object> getJobStats() {
+
+		AggregationResults<Document> results = mongoTemplate.aggregate(
+	        Aggregation.newAggregation(
+	            Aggregation.match(Criteria.where("status").is(JobStatus.OPEN)),
+	            Aggregation.group("location")
+	                .count().as("count")
+	                .avg("salary.minimum").as("averageMinimumSalary"),
+	            Aggregation.sort(Sort.Direction.DESC, "count")
+	        ),
+	        Job.class,
+	        Document.class
+	    );
+	    
+	    // Process the results and create a response map
+	    List<Document> statsList = results.getMappedResults();
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("locationStats", statsList);
+	    response.put("totalOpenJobs", jobRepo.countByStatus(JobStatus.OPEN));
+	    
+	    return response;
 	}
 	
 }

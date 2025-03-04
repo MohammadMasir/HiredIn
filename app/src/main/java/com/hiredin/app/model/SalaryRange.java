@@ -2,11 +2,14 @@ package com.hiredin.app.model;
 
 import java.math.BigDecimal;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.hiredin.app.model.enums.Period;
 
+@Document
 public class SalaryRange {
-    private BigDecimal minimum;
-    private BigDecimal maximum;
+    private Double minimum;
+    private Double maximum;
     private String currency;
     private Period period;
 
@@ -14,7 +17,7 @@ public class SalaryRange {
     public SalaryRange() {}
 
     // Constructor with parameters
-    public SalaryRange(BigDecimal minimum, BigDecimal maximum, String currency) {
+    public SalaryRange(Double minimum, Double maximum, String currency) {
         if (minimum != null && maximum != null && minimum.compareTo(maximum) > 0) {
             throw new IllegalArgumentException("Minimum salary cannot be greater than maximum salary");
         }
@@ -24,22 +27,22 @@ public class SalaryRange {
     }
 
     // Getters and Setters
-    public BigDecimal getMinimum() {
+    public Double getMinimum() {
         return minimum;
     }
 
-    public void setMinimum(BigDecimal minimum) {
+    public void setMinimum(Double minimum) {
         if (maximum != null && minimum.compareTo(maximum) > 0) {
             throw new IllegalArgumentException("Minimum salary cannot be greater than maximum salary");
         }
         this.minimum = minimum;
     }
 
-    public BigDecimal getMaximum() {
+    public Double getMaximum() {
         return maximum;
     }
 
-    public void setMaximum(BigDecimal maximum) {
+    public void setMaximum(Double maximum) {
         if (minimum != null && minimum.compareTo(maximum) > 0) {
             throw new IllegalArgumentException("Minimum salary cannot be greater than maximum salary");
         }

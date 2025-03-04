@@ -42,9 +42,9 @@ public class JobApplicationController {
 	
 	@PostMapping
     @Operation(summary = "Creates a Job Application", description = "Creating a Job Application")
-	public ResponseEntity<?> application(@RequestBody JobApplication jobApplication){
+	public ResponseEntity<?> application(String jobId, String applicantId, String coverLetter){
 		
-		if (jobAppService.newApplication(jobApplication)) {
+		if (jobAppService.newApplication(jobId, applicantId,coverLetter)) {
 				return new ResponseEntity<>(HttpStatus.CREATED);	
 		} 
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
